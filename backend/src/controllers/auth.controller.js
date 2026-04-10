@@ -1,6 +1,7 @@
 import userModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import { config } from "../config/config.js";
+import { sendEmail } from "../services/mail.service.js";
 
 const sendTokenResponse = (user, res) => {
   const token = jwt.sign(
@@ -49,6 +50,11 @@ export const registerUserController = async (req, res) => {
     });
 
     sendTokenResponse(user, res);
+
+    await sendEmail({
+      to: email,
+      subject: "Welcome to Clothy, Verify account !" 
+    })
   } catch (err) {
     console.log(err);
     res.status(500).json({
