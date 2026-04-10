@@ -2,7 +2,7 @@ import userModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import { config } from "../config/config.js";
 
-const sendTokenResponse = async (user, res) => {
+const sendTokenResponse = (user, res) => {
   const token = jwt.sign(
     {
       id: user._id,
@@ -12,13 +12,25 @@ const sendTokenResponse = async (user, res) => {
       expiresIn: "7d",
     },
   );
+
+  res.cookie("token", token);
+
+  res.status(201).json({
+    status: true,
+    user: {
+      id: user._id,
+      fullname: user.fullname,
+      email: user.email,
+      contact: user.contact,
+    },
+  });
 };
 
 export const registerUserController = async (req, res) => {
   const { fullname, email, contact, password } = req.body;
 
   try {
-    const isUserExists = userModel.findOne({
+    const isUserExists = await userModel.findOne({
       $or: [{ email }, { contact }],
     });
 
@@ -29,12 +41,14 @@ export const registerUserController = async (req, res) => {
       });
     }
 
-    const user = userModel.create({
+    const user = await userModel.create({
       fullname,
       email,
       contact,
       password,
     });
+
+    sendTokenResponse(user, res);
   } catch (err) {
     console.log(err);
     res.status(500).json({
