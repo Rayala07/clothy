@@ -25,6 +25,19 @@ const userSchema = new mongoose.Schema({
     required: [true, "password is required"],
     select: false,
   },
+  verified: {
+    type: Boolean,
+    default: false,
+  },
+  otpSentAt: {
+    type: Date,
+  },
+  otp: {
+    type: String,
+  },
+  otpExpiry: {
+    type: Date,
+  },
 });
 
 userSchema.pre("save", async function () {

@@ -30,3 +30,12 @@ export const validateRegisterUser = [
 
   validateRequest,
 ];
+
+export const validateVerifyUser = [
+  body("email").isEmail().withMessage("Invalid email format"),
+  body("otp")
+    .matches(/^\d{6}$/)
+    .withMessage("OTP must be exactly 6 digits"),
+
+  validateRequest,
+];
