@@ -23,6 +23,18 @@ if (!process.env.GOOGLE_USER) {
   throw new Error("GOOGLE_USER is not defined in environment variable");
 }
 
+if (!process.env.REDIS_ENDPOINT) {
+  throw new Error("REDIS_ENDPOINT is not defined in environment variable");
+}
+
+if (!process.env.REDIS_PORT) {
+  throw new Error("REDIS_PORT is not defined in environment variable");
+}
+
+if (!process.env.REDIS_PASSWORD) {
+  throw new Error("REDIS_PASSWORD is not defined in environment variable");
+}
+
 export const config = {
   MONGO_URI: process.env.MONGO_URI,
   JWT_SECRET: process.env.JWT_SECRET,
@@ -30,4 +42,7 @@ export const config = {
   GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
   GOOGLE_REFRESH_TOKEN: process.env.GOOGLE_REFRESH_TOKEN,
   GOOGLE_USER: process.env.GOOGLE_USER,
+  REDIS_ENDPOINT: process.env.REDIS_ENDPOINT,
+  REDIS_PORT: process.env.REDIS_PORT,
+  REDIS_PASSWORD: process.env.REDIS_PASSWORD,
 };

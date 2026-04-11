@@ -2,6 +2,7 @@ import userModel from "../models/user.model.js";
 import jwt from "jsonwebtoken";
 import { config } from "../config/config.js";
 import { sendEmail } from "../services/mail.service.js";
+import redisClient from "../config/redis.js";
 
 // Create a Token for the user and send user details as response.
 const sendTokenResponse = (user, res) => {
@@ -197,5 +198,67 @@ export const resendOtpController = async (req, res) => {
   return res.status(200).json({
     status: true,
     message: "OTP resent successfully",
+  });
+};
+
+export const loginUserController = async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await userModel.findOne({ email }).select("+password");
+
+  if (!user) {
+    return res.status(404).json({
+      status: false,
+      message: "Incorrect Credentials",
+    });
+  }
+
+  if (user.verified === false) {
+    return res.status(400).json({
+      status: false,
+      message: "Please verify your account before logging in.",
+    });
+  }
+
+  const matchPassword = await user.comparePassword(password);
+
+  if (!matchPassword) {
+    return res.status(400).json({
+      status: false,
+      message: "Incorrect Credentials",
+    });
+  }
+
+  sendTokenResponse(user, res);
+};
+
+export const logoutUserController = async (req, res) => {
+  const token = req.token;
+
+  if (!token) {
+    return res.status(401).json({
+      status: false,
+      message: "Token not found",
+    });
+  }
+
+  const expiryTime = req.user.exp * 1000;
+
+  const ttl = expiryTime - Date.now();
+
+  if (ttl <= 0) {
+    return res.status(200).json({
+      status: true,
+      message: "Logged out successfully",
+    });
+  }
+
+  await redisClient.set(`bl_${token}`, "1", { EX: Math.ceil(ttl / 1000) });
+
+  res.clearCookie("token");
+
+  return res.status(200).json({
+    status: true,
+    message: "Logged out successfully",
   });
 };
