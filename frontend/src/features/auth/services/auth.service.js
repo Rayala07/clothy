@@ -19,3 +19,24 @@ export async function registerUser({ fullname, email, contact, password }) {
     throw err.response?.data || { message: "Registration Failed" };
   }
 }
+
+export async function verifyOtp({ email, otp }) {
+  try {
+    const response = await auth_api.post("/verify_otp", {
+      email,
+      otp,
+    });
+    return response.data;
+  } catch (err) {
+    throw err.response?.data || { message: "OTP Verification Failed" };
+  }
+}
+
+export async function resendOtp({ email }) {
+  try {
+    const response = await auth_api.post("/resend_otp", { email });
+    return response.data;
+  } catch (err) {
+    throw err.response?.data || { message: "Resend OTP Failed" };
+  }
+}

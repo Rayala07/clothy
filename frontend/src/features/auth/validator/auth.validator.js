@@ -6,3 +6,7 @@ export const registerSchema = z.object({
   contact: z.string().regex(/^\d{10}$/, "Must be exactly 10 digits"),
   password: z.string().min(6, "Must be at least 6 characters"),
 });
+
+export const verifyOtpSchema = z.object({
+  otp: z.string().regex(/^\d{6}$/, "Invalid OTP"),
+});

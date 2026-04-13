@@ -2,6 +2,7 @@ import { useAuth } from "../hook/useAuth"
 import { useState } from "react"
 import { registerSchema } from "../validator/auth.validator"
 import {useNavigate} from "react-router-dom"
+import {setVerifyEmail, setOtpData} from "../utils/authStorage.js"
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -52,6 +53,8 @@ const Register = () => {
 
       try {
         await handleRegister(formData)
+        setVerifyEmail(formData.email)
+        setOtpData(formData.email)
         navigate("/verify-otp")
       } catch(err) {
         console.error("Registration Failed: ", err)
@@ -79,7 +82,7 @@ const Register = () => {
       </form>
 
       {/* {Backend Error} */}
-      {error && <p>An error occoured, Registration Failed</p>}
+      {error && <p>{error}</p>}
     </div>
   )
 }
