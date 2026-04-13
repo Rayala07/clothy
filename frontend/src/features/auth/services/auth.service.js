@@ -14,7 +14,8 @@ export async function registerUser({ fullname, email, contact, password }) {
       contact,
       password,
     });
+    return response.data;
   } catch (err) {
-    console.error("An error occoured at register: ", err);
+    throw err.response?.data || { message: "Registration Failed" };
   }
 }
