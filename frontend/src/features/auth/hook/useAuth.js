@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, setLoading, setError } from "../state/auth.slice.js";
 import {
+  loginUser,
   registerUser,
   resendOtp,
   verifyOtp,
@@ -49,10 +50,24 @@ export const useAuth = () => {
     }
   };
 
+  const handleLoginUser = async ({ email, password }) => {
+    try {
+      dispatch(setLoading(true));
+      const data = await loginUser({ email, password });
+      return data;
+    } catch (err) {
+      dispatch(setError(err.message || "Login Failed"));
+      throw err;
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
   return {
     ...auth,
     handleRegister,
     handleVerifyOtp,
     handleResendOtp,
+    handleLoginUser,
   };
 };

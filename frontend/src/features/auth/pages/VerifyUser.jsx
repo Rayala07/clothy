@@ -20,7 +20,7 @@ const VerifyUser = () => {
         if(!email) {
             navigate("/register")
         }
-    }, [email])
+    }, [email, navigate])
 
 
     // Timer logic
@@ -38,10 +38,6 @@ const VerifyUser = () => {
         const minutes = Math.floor(time / 60);
         const seconds = time % 60
         return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`
-    }
-
-    if(!email) {
-        navigate("/register")
     }
 
     const handleOtpSubmit = async (e) => {

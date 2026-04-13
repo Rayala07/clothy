@@ -40,3 +40,16 @@ export async function resendOtp({ email }) {
     throw err.response?.data || { message: "Resend OTP Failed" };
   }
 }
+
+export async function loginUser({ email, password }) {
+  try {
+    const response = await auth_api.post("/login", {
+      email,
+      password,
+    });
+
+    return response.data;
+  } catch (err) {
+    throw err.response?.data || { message: "Login Failed" };
+  }
+}

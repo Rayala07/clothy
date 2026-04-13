@@ -10,3 +10,8 @@ export const registerSchema = z.object({
 export const verifyOtpSchema = z.object({
   otp: z.string().regex(/^\d{6}$/, "Invalid OTP"),
 });
+
+export const loginSchema = z.object({
+  email: z.string().email("Invalid email"),
+  password: z.string().min(6, "Must be atleast 6 characters"),
+});

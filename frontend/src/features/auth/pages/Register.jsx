@@ -1,7 +1,7 @@
 import { useAuth } from "../hook/useAuth"
 import { useState } from "react"
 import { registerSchema } from "../validator/auth.validator"
-import {useNavigate} from "react-router-dom"
+import {useNavigate, Link} from "react-router-dom"
 import {setVerifyEmail, setOtpData} from "../utils/authStorage.js"
 
 const Register = () => {
@@ -83,6 +83,10 @@ const Register = () => {
 
       {/* {Backend Error} */}
       {error && <p>{error}</p>}
+
+      <div>
+        <p>Already a user ? <Link to="/login">Login</Link></p>
+      </div>
     </div>
   )
 }
