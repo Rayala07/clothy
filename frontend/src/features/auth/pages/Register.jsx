@@ -66,6 +66,10 @@ const Register = () => {
     <div>
       <h1>Register Page</h1>
 
+      <div>
+        <a href="http://localhost:3000/api/auth/google">Continue with Google</a>
+      </div>
+
       <form onSubmit={handleSubmit}>
         <input type="text" name="fullname" value={formData.fullname} onChange={handleChange} placeholder="Fullname"/>
         {errors.fullname && <p className="text-red-800">{errors.fullname}</p>}

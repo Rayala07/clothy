@@ -262,3 +262,9 @@ export const logoutUserController = async (req, res) => {
     message: "Logged out successfully",
   });
 };
+
+export const googleCallback = async (req, res) => {
+  console.log(req.user);
+
+  res.send("Success");
+};

@@ -5,6 +5,7 @@ import {
   validateVerifyUser,
 } from "../validators/auth.validator.js";
 import {
+  googleCallback,
   loginUserController,
   logoutUserController,
   registerUserController,
@@ -12,6 +13,7 @@ import {
   verifyOtpController,
 } from "../controllers/auth.controller.js";
 import { verifyUser } from "../middlewares/verify.middleware.js";
+import passport from "passport";
 
 const authRouter = Router();
 
@@ -24,4 +26,16 @@ authRouter.post("/login", validateLoginUser, loginUserController);
 // Logout endpoint
 authRouter.post("/logout", verifyUser, logoutUserController);
 
+// Google OAuth
+authRouter.get(
+  "/google",
+  passport.authenticate("google", { scope: ["profile", "email"] }),
+  googleCallback,
+);
+
+authRouter.get(
+  "/google/callback",
+  passport.authenticate("google", { session: false }),
+  googleCallback,
+);
 export default authRouter;
