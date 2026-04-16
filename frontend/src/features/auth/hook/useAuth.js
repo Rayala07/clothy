@@ -11,6 +11,8 @@ export const useAuth = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
+  // Accepts composed payload: { fullname, email, contact, password }
+  // fullname is composed from firstName + lastName in the Register page before calling this
   const handleRegister = async ({ fullname, email, contact, password }) => {
     try {
       dispatch(setLoading(true));
