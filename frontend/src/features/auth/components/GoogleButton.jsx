@@ -13,7 +13,7 @@ const GoogleButton = ({ onClick }) => {
     <button
       type="button"
       id="google-auth-btn"
-      className="flex items-center justify-center w-full h-[52px] px-5 bg-white text-[#3c4043] border border-[#dadce0] rounded-none font-google text-sm font-medium cursor-pointer gap-3 transition-shadow duration-150 hover:shadow-[0_1px_8px_rgba(0,0,0,0.15)] active:bg-[#f8f9fa]"
+      className="flex items-center justify-center w-full h-[44px] px-5 bg-white text-[#3c4043] border border-[#dadce0] rounded-none font-google text-sm font-medium cursor-pointer gap-3 transition-shadow duration-150 hover:shadow-[0_1px_8px_rgba(0,0,0,0.15)] active:bg-[#f8f9fa]"
       onClick={onClick}
       aria-label="Continue with Google"
     >

@@ -104,16 +104,16 @@ const VerifyUser = () => {
       navLinkText="Back to"
       navLinkCta="LOGIN"
     >
-      <div className="w-full max-w-[420px] relative z-10">
+      <div className="w-full max-w-[420px] m-auto relative z-10">
 
         {/* ── Page Header ── */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-          <p className="font-body text-[11px] font-medium tracking-[0.3em] uppercase text-black/45 mb-2">Email Verification</p>
-          <h1 className="font-display text-[72px] leading-[0.9] tracking-[-1px] uppercase text-black mb-8">Verify</h1>
+          <p className="font-body text-[10px] font-medium tracking-[0.3em] uppercase text-black/45 mb-1.5">Email Verification</p>
+          <h1 className="font-display text-[60px] leading-[0.9] tracking-[-1px] uppercase text-black mb-6">Verify</h1>
         </div>
 
         {/* Subtext showing which email the code was sent to */}
-        <p className="font-body text-sm font-normal text-black/70 leading-relaxed mb-8">
+        <p className="font-body text-[13px] font-normal text-black/70 leading-relaxed mb-6">
           We sent a 6-digit code to <strong>{email}</strong>. Enter it below.
         </p>
 
@@ -134,7 +134,7 @@ const VerifyUser = () => {
           <button
             id="verify-submit-btn"
             type="submit"
-            className="flex items-center justify-center w-full h-[52px] px-5 bg-accent text-black border-[1.5px] border-black rounded-none font-body text-[13px] font-bold tracking-[0.2em] uppercase cursor-pointer gap-2 transition-all duration-150 hover:bg-[#b8e800] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed mb-0"
+            className="flex items-center justify-center w-full h-[44px] px-5 bg-accent text-black border-[1.5px] border-black rounded-none font-body text-[12px] font-bold tracking-[0.2em] uppercase cursor-pointer gap-2 transition-all duration-150 hover:bg-[#b8e800] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed mb-0"
             disabled={loading}
           >
             {loading ? "Verifying..." : "Verify Code →"}
@@ -149,12 +149,12 @@ const VerifyUser = () => {
         </form>
 
         {/* ── Resend Row ── */}
-        <div className="text-center mt-5">
-          <span className="font-body text-[11px] font-normal tracking-[0.05em] text-black/45">Didn&apos;t receive it?&nbsp;</span>
+        <div className="text-center mt-4">
+          <span className="font-body text-[10px] font-normal tracking-[0.05em] text-black/45">Didn&apos;t receive it?&nbsp;</span>
           <button
             type="button"
             id="otp-resend-btn"
-            className="bg-transparent border-none font-body text-[11px] font-bold tracking-[0.2em] uppercase text-black cursor-pointer underline underline-offset-[3px] p-0 transition-colors duration-150 decoration-transparent hover:not-disabled:decoration-accent disabled:opacity-35 disabled:cursor-default"
+            className="bg-transparent border-none font-body text-[10px] font-bold tracking-[0.2em] uppercase text-black cursor-pointer underline underline-offset-[3px] p-0 transition-colors duration-150 decoration-transparent hover:not-disabled:decoration-accent disabled:opacity-35 disabled:cursor-default"
             onClick={handleResend}
             disabled={timeLeft > 0}
           >
@@ -163,7 +163,7 @@ const VerifyUser = () => {
 
           {/* Countdown timer — only shown while timer is active */}
           {timeLeft > 0 && (
-            <p className="font-body text-[11px] font-normal tracking-[0.05em] text-black/45 mt-2">Resend in {formatTime(timeLeft)}</p>
+            <p className="font-body text-[10px] font-normal tracking-[0.05em] text-black/45 mt-2">Resend in {formatTime(timeLeft)}</p>
           )}
         </div>
 

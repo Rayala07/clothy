@@ -31,7 +31,7 @@ const AuthLayout = ({ navLinkTo, navLinkText, navLinkCta, children }) => {
       </nav>
 
       {/* ── Centered Form Body ── */}
-      <main className="flex-1 overflow-y-auto flex items-center justify-center p-6 relative z-0">
+      <main className="flex-1 overflow-y-auto flex flex-col p-6 relative z-0">
         {children}
       </main>
 

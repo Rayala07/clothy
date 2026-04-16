@@ -17,9 +17,9 @@
  */
 const FormField = ({ id, label, type = "text", name, value, onChange, error, rightSlot }) => {
   return (
-    <div className="relative min-h-[72px] w-full">
+    <div className="relative w-full pb-4">
       {/* Field label */}
-      <label htmlFor={id} className="block font-body text-[11px] font-semibold tracking-[0.22em] uppercase text-black mb-1.5">{label}</label>
+      <label htmlFor={id} className="block font-body text-[10px] font-semibold tracking-[0.2em] uppercase text-black mb-1">{label}</label>
 
       {/* Input wrapper — uses relative positioning for optional right icon */}
       <div className="relative flex items-center">
@@ -29,7 +29,7 @@ const FormField = ({ id, label, type = "text", name, value, onChange, error, rig
           name={name}
           value={value}
           onChange={onChange}
-          className={`block w-full h-12 px-4 font-body text-sm font-normal text-black bg-white border-[1.5px] border-black rounded-none outline-none transition-all duration-150 placeholder:text-black/30 focus:border-2 focus:bg-cream appearance-none ${rightSlot ? "pr-12" : ""}`}
+          className={`block w-full h-11 px-4 font-body text-sm font-normal text-black bg-white border-[1.5px] border-black rounded-none outline-none transition-all duration-150 placeholder:text-black/30 focus:border-[1.5px] focus:bg-cream appearance-none ${rightSlot ? "pr-12" : ""}`}
           autoComplete="off"
           spellCheck={false}
         />
@@ -37,8 +37,8 @@ const FormField = ({ id, label, type = "text", name, value, onChange, error, rig
         {rightSlot && rightSlot}
       </div>
 
-      {/* Inline validation error */}
-      {error && <p className="font-body text-[11px] font-medium tracking-[1px] uppercase text-[#CC0000] absolute -bottom-4 left-0 m-0">{error}</p>}
+      {/* Inline validation error safely sitting in the pb-4 area without pushing layout */}
+      {error && <p className="font-body text-[9px] font-medium tracking-[1px] uppercase text-[#CC0000] absolute bottom-0 left-0 m-0">{error}</p>}
     </div>
   );
 };

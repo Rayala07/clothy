@@ -101,7 +101,7 @@ const Login = () => {
 
   // Handle Google OAuth redirect
   const handleGoogleAuth = () => {
-    // TODO: Google auth handler
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/api/auth/google`;
   };
 
   return (
@@ -111,17 +111,17 @@ const Login = () => {
       navLinkCta="REGISTER"
     >
 
-      <div className="w-full max-w-[480px] relative z-10">
+      <div className="w-full max-w-[480px] m-auto relative z-10">
 
         {/* ── Page Header ── */}
-        <p className="font-body text-[11px] font-medium tracking-[0.3em] uppercase text-black/45 mb-2">Welcome Back</p>
-        <h1 className="font-display text-[72px] leading-[0.9] tracking-[-1px] uppercase text-black mb-8">Login</h1>
+        <p className="font-body text-[10px] font-medium tracking-[0.3em] uppercase text-black/45 mb-1.5">Welcome Back</p>
+        <h1 className="font-display text-[60px] leading-[0.9] tracking-[-1px] uppercase text-black mb-6">Login</h1>
 
         {/* ── Login Form ── */}
         <form onSubmit={handleSubmit} noValidate>
 
           {/* Email Address */}
-          <div className="mb-2">
+          <div>
             <FormField
               id="login-email"
               label="Email Address"
@@ -134,7 +134,7 @@ const Login = () => {
           </div>
 
           {/* Password with eye toggle */}
-          <div className="mb-2">
+          <div>
             <PasswordField
               id="login-password"
               label="Password"
@@ -152,7 +152,7 @@ const Login = () => {
           <button
             id="login-submit-btn"
             type="submit"
-            className="flex items-center justify-center w-full h-[52px] px-5 bg-accent text-black border-[1.5px] border-black rounded-none font-body text-[13px] font-bold tracking-[0.2em] uppercase cursor-pointer gap-2 transition-all duration-150 hover:bg-[#b8e800] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed mb-0"
+            className="flex items-center justify-center w-full h-[44px] px-5 bg-accent text-black border-[1.5px] border-black rounded-none font-body text-[12px] font-bold tracking-[0.2em] uppercase cursor-pointer gap-2 transition-all duration-150 hover:bg-[#b8e800] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed mb-0"
             disabled={loading}
           >
             {loading ? "Logging In..." : "Login →"}
@@ -167,9 +167,9 @@ const Login = () => {
         </form>
 
         {/* ── OR Divider ── */}
-        <div className="flex items-center gap-4 my-6">
+        <div className="flex items-center gap-4 my-4">
           <div className="flex-1 h-[1px] bg-black" />
-          <span className="font-body text-[11px] font-semibold tracking-[0.25em] uppercase text-black whitespace-nowrap">or</span>
+          <span className="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-black whitespace-nowrap">or</span>
           <div className="flex-1 h-[1px] bg-black" />
         </div>
 
@@ -177,9 +177,9 @@ const Login = () => {
         <GoogleButton onClick={handleGoogleAuth} />
 
         {/* ── Bottom register link ── */}
-        <div className="mt-6 text-center font-body text-[11px] font-normal tracking-[0.05em] text-black/45">
+        <div className="mt-4 text-center font-body text-[10px] font-normal tracking-[0.05em] text-black/45">
           Don&apos;t have an account?&nbsp;
-          <Link to="/register" className="font-body text-[11px] font-bold tracking-[0.2em] uppercase text-black transition-colors duration-150 hover:underline hover:decoration-accent hover:underline-offset-[3px]">
+          <Link to="/register" className="font-body text-[10px] font-bold tracking-[0.2em] uppercase text-black transition-colors duration-150 hover:underline hover:decoration-accent hover:underline-offset-[3px]">
             Register →
           </Link>
         </div>

@@ -82,7 +82,7 @@ const OtpInput = ({ digits, onChange }) => {
   };
 
   return (
-    <div className="flex gap-2.5 mb-8" role="group" aria-label="One-time password input">
+    <div className="flex gap-2.5 mb-6" role="group" aria-label="One-time password input">
       {Array.from({ length: OTP_LENGTH }).map((_, i) => (
         <input
           key={i}
@@ -95,7 +95,7 @@ const OtpInput = ({ digits, onChange }) => {
           onChange={(e) => handleChange(e, i)}
           onKeyDown={(e) => handleKeyDown(e, i)}
           onPaste={handlePaste}
-          className={`flex-1 h-16 text-center font-body text-2xl font-bold text-black bg-white border-[1.5px] border-black rounded-none outline-none transition-all duration-150 focus:border-2 focus:border-black appearance-none ${digits[i] ? "bg-cream" : ""}`}
+          className={`flex-1 min-w-0 w-full h-[52px] text-center font-body text-2xl font-bold text-black bg-white border-[1.5px] border-black rounded-none outline-none transition-all duration-150 focus:border-[1.5px] focus:border-black appearance-none ${digits[i] ? "bg-cream" : ""}`}
           aria-label={`Digit ${i + 1}`}
           autoComplete="one-time-code"
         />

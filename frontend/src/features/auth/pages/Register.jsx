@@ -116,7 +116,7 @@ const Register = () => {
 
   // Handle Google OAuth redirect
   const handleGoogleAuth = () => {
-    // TODO: Google auth handler
+    window.location.href = `${import.meta.env.VITE_BACKEND_URL}/api/auth/google`;
   };
 
   return (
@@ -126,17 +126,17 @@ const Register = () => {
       navLinkCta="LOGIN"
     >
 
-      <div className="w-full max-w-[480px] relative z-10">
+      <div className="w-full max-w-[480px] m-auto relative z-10">
 
         {/* ── Page Header ── */}
-        <p className="font-body text-[11px] font-medium tracking-[0.3em] uppercase text-black/45 mb-2">Create Account</p>
-        <h1 className="font-display text-[60px] leading-[0.9] tracking-[-1px] uppercase text-black mb-6">Register</h1>
+        <p className="font-body text-[10px] font-medium tracking-[0.3em] uppercase text-black/45 mb-1.5">Create Account</p>
+        <h1 className="font-display text-[52px] leading-[0.9] tracking-[-1px] uppercase text-black mb-5">Register</h1>
 
         {/* ── Registration Form ── */}
         <form onSubmit={handleSubmit} noValidate>
 
           {/* First Name + Last Name — side by side */}
-          <div className="flex gap-3 mb-2 *:flex-1">
+          <div className="flex gap-3 *:flex-1">
             <FormField
               id="reg-first-name"
               label="First Name"
@@ -158,7 +158,7 @@ const Register = () => {
           </div>
 
           {/* Email Address */}
-          <div className="mb-2">
+          <div>
             <FormField
               id="reg-email"
               label="Email Address"
@@ -171,7 +171,7 @@ const Register = () => {
           </div>
 
           {/* Phone / Contact */}
-          <div className="mb-2">
+          <div>
             <FormField
               id="reg-contact"
               label="Phone Number"
@@ -184,7 +184,7 @@ const Register = () => {
           </div>
 
           {/* Password */}
-          <div className="mb-2">
+          <div>
             <PasswordField
               id="reg-password"
               label="Password"
@@ -196,7 +196,7 @@ const Register = () => {
           </div>
 
           {/* Confirm Password */}
-          <div className="mb-2" style={{ marginBottom: "24px" }}>
+          <div style={{ marginBottom: "12px" }}>
             <PasswordField
               id="reg-confirm-password"
               label="Confirm Password"
@@ -211,7 +211,7 @@ const Register = () => {
           <button
             id="reg-submit-btn"
             type="submit"
-            className="flex items-center justify-center w-full h-[52px] px-5 bg-accent text-black border-[1.5px] border-black rounded-none font-body text-[13px] font-bold tracking-[0.2em] uppercase cursor-pointer gap-2 transition-all duration-150 hover:bg-[#b8e800] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed mb-0"
+            className="flex items-center justify-center w-full h-[44px] px-5 bg-accent text-black border-[1.5px] border-black rounded-none font-body text-[12px] font-bold tracking-[0.2em] uppercase cursor-pointer gap-2 transition-all duration-150 hover:bg-[#b8e800] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed mb-0"
             disabled={loading}
           >
             {loading ? "Creating Account..." : "Create Account →"}
@@ -226,9 +226,9 @@ const Register = () => {
         </form>
 
         {/* ── OR Divider ── */}
-        <div className="flex items-center gap-4 my-6">
+        <div className="flex items-center gap-4 my-4">
           <div className="flex-1 h-[1px] bg-black" />
-          <span className="font-body text-[11px] font-semibold tracking-[0.25em] uppercase text-black whitespace-nowrap">or</span>
+          <span className="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-black whitespace-nowrap">or</span>
           <div className="flex-1 h-[1px] bg-black" />
         </div>
 
@@ -236,7 +236,7 @@ const Register = () => {
         <GoogleButton onClick={handleGoogleAuth} />
 
         {/* ── Terms micro-text ── */}
-        <p className="font-body text-[11px] font-normal tracking-[0.03em] text-black/45 text-center mt-5 [&>a]:text-black/45 [&>a]:underline [&>a]:underline-offset-2 hover:[&>a]:text-black">
+        <p className="font-body text-[10px] font-normal tracking-[0.03em] text-black/45 text-center mt-4 [&>a]:text-black/45 [&>a]:underline [&>a]:underline-offset-2 hover:[&>a]:text-black">
           By creating an account, you agree to our{" "}
           <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a>.
         </p>
