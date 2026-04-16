@@ -47,6 +47,10 @@ if (!process.env.GOOGLE_AUTH_CLIENT_SECRET) {
   );
 }
 
+if (!process.env.FRONTEND_URL) {
+  throw new Error("FRONTEND_URL is not defined in environment variable");
+}
+
 export const config = {
   MONGO_URI: process.env.MONGO_URI,
   JWT_SECRET: process.env.JWT_SECRET,
@@ -59,4 +63,5 @@ export const config = {
   REDIS_PASSWORD: process.env.REDIS_PASSWORD,
   GOOGLE_AUTH_CLIENT_ID: process.env.GOOGLE_AUTH_CLIENT_ID,
   GOOGLE_AUTH_CLIENT_SECRET: process.env.GOOGLE_AUTH_CLIENT_SECRET,
+  FRONTEND_URL: process.env.FRONTEND_URL,
 };

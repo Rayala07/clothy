@@ -266,5 +266,5 @@ export const logoutUserController = async (req, res) => {
 export const googleCallback = async (req, res) => {
   console.log(req.user);
 
-  res.send("Success");
+  res.redirect(`${config.FRONTEND_URL}/dashboard`);
 };
