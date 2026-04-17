@@ -9,7 +9,9 @@ const userSchema = new mongoose.Schema({
   },
   contact: {
     type: String,
-    required: [true, "contact is required"],
+    required: function () {
+      return !this.googleId;
+    },
   },
   fullname: {
     type: String,
@@ -22,7 +24,9 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "password is required"],
+    required: function () {
+      return !this.googleId;
+    },
     select: false,
   },
   verified: {
@@ -37,6 +41,13 @@ const userSchema = new mongoose.Schema({
   },
   otpExpiry: {
     type: Date,
+  },
+  googleId: {
+    type: String,
+  },
+  displayImage: {
+    type: String,
+    default: "../../assets/images/default_profile.jpg",
   },
 });
 

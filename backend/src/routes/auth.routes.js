@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { config } from "../config/config.js";
 import {
   validateLoginUser,
   validateRegisterUser,
@@ -35,7 +36,10 @@ authRouter.get(
 
 authRouter.get(
   "/google/callback",
-  passport.authenticate("google", { session: false }),
+  passport.authenticate("google", {
+    session: false,
+    failureRedirect: `${config.FRONTEND_URL}/login`,
+  }),
   googleCallback,
 );
 export default authRouter;
