@@ -22,7 +22,6 @@ const productSchema = new mongoose.Schema(
       },
       currency: {
         type: String,
-        enum: ["USD", "EUR", "GBP", "JPY", "INR"],
         default: "INR",
       },
     },
@@ -31,10 +30,6 @@ const productSchema = new mongoose.Schema(
         url: {
           type: String,
           required: [true, "Product image upload is required"],
-        },
-        alt: {
-          type: String,
-          required: [true],
         },
       },
     ],

@@ -36,11 +36,11 @@ export const verifyUser = async (req, res, next) => {
   }
 };
 
-export const authenticateSeller = async (req, res) => {
+export const authenticateSeller = async (req, res, next) => {
   try {
     const { id } = req.user;
 
-    const user = await userModel.findOne(id);
+    const user = await userModel.findById(id);
 
     if (!user) {
       return res.status(401).json({
@@ -57,6 +57,7 @@ export const authenticateSeller = async (req, res) => {
     }
 
     req.user = user;
+
     next();
   } catch (err) {
     console.error("An error occured: ", err);

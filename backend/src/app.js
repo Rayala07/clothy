@@ -8,6 +8,7 @@ import "dotenv/config";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { config } from "./config/config.js";
+import productRouter from "./routes/product.routes.js";
 
 const app = express();
 
@@ -42,5 +43,8 @@ passport.use(
 
 // Authentication Routes
 app.use("/api/auth", authRouter);
+
+// Role: Seller {Product Routes}
+app.use("/api/products", productRouter);
 
 export default app;
