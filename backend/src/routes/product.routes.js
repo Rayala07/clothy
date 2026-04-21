@@ -5,6 +5,7 @@ import {
 import multer from "multer";
 import { Router } from "express";
 import { createProduct } from "../controllers/product.controller.js";
+import { validateCreateProduct } from "../validators/product.validator.js";
 
 // File upload
 const upload = multer({
@@ -18,6 +19,7 @@ const productRouter = Router();
 
 productRouter.post(
   "/create",
+  validateCreateProduct,
   verifyUser,
   authenticateSeller,
   upload.array("images", 7),

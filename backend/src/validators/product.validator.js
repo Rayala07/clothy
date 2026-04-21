@@ -1,0 +1,22 @@
+import { body, validationResult } from "express-validator";
+
+function validateRequest(req, res, next) {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array(),
+    });
+  }
+
+  next();
+}
+
+export const validateCreateProduct = [
+  body("title").notEmpty().withMessage("Product title is required"),
+  body("description").notEmpty().withMessage("Product description is required"),
+  body("priceAmount")
+    .notEmpty()
+    .isNumeric()
+    .withMessage("Price amount must be a number"),
+];
