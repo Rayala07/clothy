@@ -1,6 +1,6 @@
 import { useState } from "react";
-import FormField from "../../features/auth/components/FormField";
-import { useProduct } from "../../features/products/hook/useProduct";
+import FormField from "../../../auth/components/FormField";
+import { useProduct } from "../../hook/useProduct";
 
 const CreateProduct = () => {
   const { handleCreateProduct } = useProduct();

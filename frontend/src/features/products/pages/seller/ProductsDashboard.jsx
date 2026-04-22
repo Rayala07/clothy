@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { Link, useNavigate, Outlet } from "react-router-dom";
-import { useAuth } from "../../features/auth/hook/useAuth";
+import { useAuth } from "../../../auth/hook/useAuth";
 import { RiUserLine } from "@remixicon/react";
 
 const ProductsDashboard = () => {

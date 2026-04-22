@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useProduct } from "../../features/products/hook/useProduct";
-import ProductCard from "../../components/seller/ProductCard";
+import { useProduct } from "../../hook/useProduct";
+import ProductCard from "../../../../components/seller/ProductCard";
 
 const ViewProducts = () => {
   const { handleGetProducts } = useProduct();
