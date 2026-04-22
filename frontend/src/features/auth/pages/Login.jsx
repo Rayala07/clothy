@@ -111,7 +111,7 @@ const Login = () => {
       navLinkCta="REGISTER"
     >
 
-      <div className="w-full max-w-[480px] m-auto relative z-10">
+      <div className="w-full max-w-120 m-auto relative z-10">
 
         {/* ── Page Header ── */}
         <p className="font-body text-[10px] font-medium tracking-[0.3em] uppercase text-black/45 mb-1.5">Welcome Back</p>
@@ -168,9 +168,9 @@ const Login = () => {
 
         {/* ── OR Divider ── */}
         <div className="flex items-center gap-4 my-4">
-          <div className="flex-1 h-[1px] bg-black" />
+          <div className="flex-1 h-px bg-black" />
           <span className="font-body text-[10px] font-semibold tracking-[0.25em] uppercase text-black whitespace-nowrap">or</span>
-          <div className="flex-1 h-[1px] bg-black" />
+          <div className="flex-1 h-px bg-black" />
         </div>
 
         {/* ── Google Auth ── */}

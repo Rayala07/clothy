@@ -6,13 +6,14 @@ const auth_api = axios.create({
   withCredentials: true,
 });
 
-export async function registerUser({ fullname, email, contact, password }) {
+export async function registerUser({ fullname, email, contact, password, role }) {
   try {
     const response = await auth_api.post("/register", {
       fullname,
       email,
       contact,
       password,
+      role,
     });
     return response.data;
   } catch (err) {
@@ -51,5 +52,14 @@ export async function loginUser({ email, password }) {
     return response.data;
   } catch (err) {
     throw err.response?.data || { message: "Login Failed" };
+  }
+}
+
+export async function logoutUser() {
+  try {
+    const response = await auth_api.post("/logout");
+    return response.data;
+  } catch (err) {
+    throw err.response?.data || { message: "Logout Failed" };
   }
 }

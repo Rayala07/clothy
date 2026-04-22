@@ -63,6 +63,7 @@ const Register = () => {
     confirmPassword: "",
   });
 
+  const [role, setRole] = useState("buyer");
   const [errors, setErrors] = useState({});
 
   const { handleRegister, loading, error } = useAuth();
@@ -101,6 +102,7 @@ const Register = () => {
       email: formData.email,
       contact: formData.contact,
       password: formData.password,
+      role: role,
     };
 
     try {
@@ -158,7 +160,7 @@ const Register = () => {
           </div>
 
           {/* Email Address */}
-          <div>
+          <div className="-mt-1">
             <FormField
               id="reg-email"
               label="Email Address"
@@ -171,7 +173,7 @@ const Register = () => {
           </div>
 
           {/* Phone / Contact */}
-          <div>
+          <div className="-mt-1">
             <FormField
               id="reg-contact"
               label="Phone Number"
@@ -184,7 +186,7 @@ const Register = () => {
           </div>
 
           {/* Password */}
-          <div>
+          <div className="-mt-1">
             <PasswordField
               id="reg-password"
               label="Password"
@@ -196,7 +198,7 @@ const Register = () => {
           </div>
 
           {/* Confirm Password */}
-          <div style={{ marginBottom: "12px" }}>
+          <div className="-mt-1" style={{ marginBottom: "12px" }}>
             <PasswordField
               id="reg-confirm-password"
               label="Confirm Password"
@@ -205,6 +207,29 @@ const Register = () => {
               onChange={handleChange}
               error={errors.confirmPassword}
             />
+          </div>
+
+          {/* ── Role Selector ── */}
+          <div className="w-full pb-3 -mt-1">
+            <label className="block font-body text-[10px] font-semibold tracking-[0.2em] uppercase text-black mb-1 opacity-50">Account Type</label>
+            <div className="flex w-full">
+              <button
+                type="button"
+                onClick={() => setRole("buyer")}
+                className={`flex-1 h-[44px] border-[1.5px] border-black focus:outline-none rounded-none font-body text-[11px] font-bold tracking-[3px] uppercase transition-all duration-150 ${role === "buyer" ? "bg-black text-white opacity-100" : "bg-white text-black opacity-50"} m-0`}
+                style={{ marginRight: "-1.5px", zIndex: role === "buyer" ? 1 : 0 }}
+              >
+                BUYER
+              </button>
+              <button
+                type="button"
+                onClick={() => setRole("seller")}
+                className={`flex-1 h-[44px] border-[1.5px] border-black focus:outline-none rounded-none font-body text-[11px] font-bold tracking-[3px] uppercase transition-all duration-150 ${role === "seller" ? "bg-black text-white opacity-100" : "bg-white text-black opacity-50"} m-0`}
+                style={{ zIndex: role === "seller" ? 1 : 0 }}
+              >
+                SELLER
+              </button>
+            </div>
           </div>
 
           {/* Primary CTA button */}

@@ -19,7 +19,7 @@ const productRouter = Router();
 
 // Seller: [Create Products]
 productRouter.post(
-  "/create",
+  "/",
   validateCreateProduct,
   verifyUser,
   authenticateSeller,

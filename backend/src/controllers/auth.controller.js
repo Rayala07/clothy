@@ -25,6 +25,7 @@ const sendTokenResponse = (user, res) => {
       fullname: user.fullname,
       email: user.email,
       contact: user.contact,
+      role: user.role,
     },
   });
 };
@@ -35,7 +36,7 @@ const generateOtp = () => {
 };
 
 export const registerUserController = async (req, res) => {
-  const { fullname, email, contact, password } = req.body;
+  const { fullname, email, contact, password, role } = req.body;
 
   try {
     const isUserExists = await userModel.findOne({
@@ -54,6 +55,7 @@ export const registerUserController = async (req, res) => {
       email,
       contact,
       password,
+      ...(role && { role }),
     });
 
     // Generate OTP and set OTP expiry time
@@ -269,7 +271,7 @@ export const googleCallback = async (req, res) => {
   const email = emails[0].value;
   const profilePhoto = photos[0].value;
 
-  const user = await userModel.findOne({ email });
+  let user = await userModel.findOne({ email });
 
   if (!user) {
     user = await userModel.create({

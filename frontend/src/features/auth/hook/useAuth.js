@@ -5,18 +5,19 @@ import {
   registerUser,
   resendOtp,
   verifyOtp,
+  logoutUser,
 } from "../services/auth.service.js";
 
 export const useAuth = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
-  // Accepts composed payload: { fullname, email, contact, password }
+  // Accepts composed payload: { fullname, email, contact, password, role }
   // fullname is composed from firstName + lastName in the Register page before calling this
-  const handleRegister = async ({ fullname, email, contact, password }) => {
+  const handleRegister = async ({ fullname, email, contact, password, role }) => {
     try {
       dispatch(setLoading(true));
-      const data = await registerUser({ fullname, email, contact, password });
+      const data = await registerUser({ fullname, email, contact, password, role });
       return data;
     } catch (err) {
       dispatch(setError(err.message || "Registration Failed"));
@@ -56,10 +57,26 @@ export const useAuth = () => {
     try {
       dispatch(setLoading(true));
       const data = await loginUser({ email, password });
+      // Store user (including role) into Redux state so SellerRoute can read it
+      if (data.user) dispatch(setUser(data.user));
       return data;
     } catch (err) {
       dispatch(setError(err.message || "Login Failed"));
       throw err;
+    } finally {
+      dispatch(setLoading(false));
+    }
+  };
+
+  const handleLogoutUser = async () => {
+    try {
+      dispatch(setLoading(true));
+      await logoutUser();
+      dispatch(setUser(null));
+    } catch (err) {
+      console.error("Logout error", err);
+      // We still clear the local user state even if the server fails, for security/reset purposes
+      dispatch(setUser(null));
     } finally {
       dispatch(setLoading(false));
     }
@@ -71,5 +88,6 @@ export const useAuth = () => {
     handleVerifyOtp,
     handleResendOtp,
     handleLoginUser,
+    handleLogoutUser,
   };
 };
