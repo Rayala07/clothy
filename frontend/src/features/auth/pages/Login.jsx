@@ -91,9 +91,12 @@ const Login = () => {
     setErrors({});
 
     try {
-      // TODO: handle API call here
-      await handleLoginUser(formData);
-      navigate("/dashboard");
+      const user = await handleLoginUser(formData);
+      if(user.role === "seller") {
+        navigate("/dashboard")
+      } else {
+        navigate("/")
+      }
     } catch (err) {
       console.error("Login Failed: ", err.message);
     }

@@ -1,11 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
-import { setUser, setLoading, setError } from "../state/auth.slice.js";
+import {
+  setUser,
+  setLoading,
+  setError,
+  setIsAuthLoading,
+} from "../state/auth.slice.js";
 import {
   loginUser,
   registerUser,
   resendOtp,
   verifyOtp,
   logoutUser,
+  getMe,
 } from "../services/auth.service.js";
 
 export const useAuth = () => {
@@ -14,10 +20,22 @@ export const useAuth = () => {
 
   // Accepts composed payload: { fullname, email, contact, password, role }
   // fullname is composed from firstName + lastName in the Register page before calling this
-  const handleRegister = async ({ fullname, email, contact, password, role }) => {
+  const handleRegister = async ({
+    fullname,
+    email,
+    contact,
+    password,
+    role,
+  }) => {
     try {
       dispatch(setLoading(true));
-      const data = await registerUser({ fullname, email, contact, password, role });
+      const data = await registerUser({
+        fullname,
+        email,
+        contact,
+        password,
+        role,
+      });
       return data;
     } catch (err) {
       dispatch(setError(err.message || "Registration Failed"));
@@ -59,12 +77,27 @@ export const useAuth = () => {
       const data = await loginUser({ email, password });
       // Store user (including role) into Redux state so SellerRoute can read it
       if (data.user) dispatch(setUser(data.user));
-      return data;
+      return data.user;
     } catch (err) {
       dispatch(setError(err.message || "Login Failed"));
       throw err;
     } finally {
       dispatch(setLoading(false));
+    }
+  };
+
+  const handleGetMe = async () => {
+    try {
+      dispatch(setLoading(true));
+      const data = await getMe();
+      if (data) dispatch(setUser(data.user));
+      return data.user;
+    } catch (err) {
+      dispatch(setError(err.message || "Get Me Failed"));
+      throw err;
+    } finally {
+      dispatch(setLoading(false));
+      dispatch(setIsAuthLoading(false));
     }
   };
 
@@ -89,5 +122,6 @@ export const useAuth = () => {
     handleResendOtp,
     handleLoginUser,
     handleLogoutUser,
+    handleGetMe,
   };
 };

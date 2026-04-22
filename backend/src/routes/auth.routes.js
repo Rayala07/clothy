@@ -6,6 +6,7 @@ import {
   validateVerifyUser,
 } from "../validators/auth.validator.js";
 import {
+  getUserController,
   googleCallback,
   loginUserController,
   logoutUserController,
@@ -23,6 +24,9 @@ authRouter.post("/register", validateRegisterUser, registerUserController);
 authRouter.post("/verify_otp", validateVerifyUser, verifyOtpController);
 authRouter.post("/resend_otp", resendOtpController);
 authRouter.post("/login", validateLoginUser, loginUserController);
+
+// Get Logged-In user details:
+authRouter.get("/me", verifyUser, getUserController)
 
 // Logout endpoint
 authRouter.post("/logout", verifyUser, logoutUserController);

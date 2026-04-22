@@ -6,7 +6,13 @@ const auth_api = axios.create({
   withCredentials: true,
 });
 
-export async function registerUser({ fullname, email, contact, password, role }) {
+export async function registerUser({
+  fullname,
+  email,
+  contact,
+  password,
+  role,
+}) {
   try {
     const response = await auth_api.post("/register", {
       fullname,
@@ -52,6 +58,15 @@ export async function loginUser({ email, password }) {
     return response.data;
   } catch (err) {
     throw err.response?.data || { message: "Login Failed" };
+  }
+}
+
+export async function getMe() {
+  try {
+    const response = await auth_api.get("/me");
+    return response.data;
+  } catch (err) {
+    throw err.response?.data || { message: "Get Me Failed" };
   }
 }
 

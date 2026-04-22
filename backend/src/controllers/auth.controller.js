@@ -297,3 +297,28 @@ export const googleCallback = async (req, res) => {
 
   res.redirect(`${config.FRONTEND_URL}/dashboard`);
 };
+
+export const getUserController = async (req, res) => {
+  const { id } = req.user;
+
+  const user = await userModel.findById(id);
+
+  if (!user) {
+    return res.status(404).json({
+      status: false,
+      message: "User not found",
+    });
+  }
+
+  return res.status(200).json({
+    status: true,
+    message: "User fetched successfully",
+    user: {
+      id: user._id,
+      fullname: user.fullname,
+      email: user.email,
+      contact: user.contact,
+      role: user.role,
+    },
+  });
+};
