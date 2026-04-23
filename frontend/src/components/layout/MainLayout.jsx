@@ -6,7 +6,7 @@ import { RiUserLine } from "@remixicon/react";
 const MainLayout = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  const { user, handleLogoutUser } = useAuth();
+  const { user, handleLogoutUser, isAuthLoading } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -50,8 +50,10 @@ const MainLayout = () => {
           )}
         </div>
 
-        <div className="flex-1 flex justify-end relative" ref={dropdownRef}>
-          {user ? (
+        <div className="flex-1 flex justify-end relative min-w-[120px]" ref={dropdownRef}>
+          {isAuthLoading ? (
+            <div className="w-10 h-10 rounded-full border-[1.5px] border-black/10 bg-black/5 animate-pulse" />
+          ) : user ? (
             <>
               <button 
                 type="button"

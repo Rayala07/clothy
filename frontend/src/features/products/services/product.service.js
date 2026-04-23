@@ -18,10 +18,20 @@ export async function createProduct(formData) {
 
 export async function getProducts() {
   try {
-    const response = await product_api.get("/");
+    const response = await product_api.get("/seller-products");
     return response.data;
   } catch (err) {
     console.error("An error occured: ", err);
     throw err.response?.data || { message: "Get products failed" };
+  }
+}
+
+export async function getAllProducts() {
+  try {
+    const response = await product_api.get("/");
+    return response.data;
+  } catch (err) {
+    console.error("Error occured: ", err);
+    throw err.response?.data || { message: "Get All products failed" };
   }
 }
