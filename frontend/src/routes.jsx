@@ -1,41 +1,60 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet } from "react-router-dom";
 import Register from "./features/auth/pages/Register";
 import VerifyUser from "./features/auth/pages/VerifyUser";
 import Login from "./features/auth/pages/Login";
 import SellerRoute from "./components/auth/SellerRoute";
-import ProductsDashboard from "./features/products/pages/seller/ProductsDashboard";
+import GuestRoute from "./components/auth/GuestRoute";
+import MainLayout from "./components/layout/MainLayout";
+import Home from "./features/products/pages/buyer/Home";
 import DashboardLanding from "./features/products/pages/seller/DashboardLanding";
 import CreateProduct from "./features/products/pages/seller/CreateProduct";
 import ViewProducts from "./features/products/pages/seller/ViewProducts";
 
 export const router = createBrowserRouter([
     {
-        path: "/",
-        element: <p>Home Page</p>
-    }, 
+        element: <MainLayout />,
+        children: [
+            {
+                path: "/",
+                element: <Home />
+            },
+            {
+                path: "/dashboard",
+                element: (
+                  <SellerRoute>
+                    <Outlet />
+                  </SellerRoute>
+                ),
+                children: [
+                    { index: true, element: <DashboardLanding /> },
+                    { path: "create", element: <CreateProduct /> },
+                    { path: "view", element: <ViewProducts /> }
+                ]
+            }
+        ]
+    },
     {
         path: "/register",
-        element: <Register />
+        element: (
+          <GuestRoute>
+            <Register />
+          </GuestRoute>
+        )
     },
     {
         path: "/verify-otp",
-        element: <VerifyUser />
+        element: (
+          <GuestRoute>
+            <VerifyUser />
+          </GuestRoute>
+        )
     },
     {
         path: "/login",
-        element: <Login />
-    },
-    {
-        path: "/dashboard",
         element: (
-          <SellerRoute>
-            <ProductsDashboard />
-          </SellerRoute>
-        ),
-        children: [
-            { index: true, element: <DashboardLanding /> },
-            { path: "create", element: <CreateProduct /> },
-            { path: "view", element: <ViewProducts /> }
-        ]
+          <GuestRoute>
+            <Login />
+          </GuestRoute>
+        )
     }
 ]);
