@@ -4,7 +4,11 @@ import {
 } from "../middlewares/verify.middleware.js";
 import multer from "multer";
 import { Router } from "express";
-import { createProductController, getProductsController } from "../controllers/product.controller.js";
+import {
+  createProductController,
+  getSellerProductsController,
+  getProductsController,
+} from "../controllers/product.controller.js";
 import { validateCreateProduct } from "../validators/product.validator.js";
 
 // File upload
@@ -27,7 +31,16 @@ productRouter.post(
   createProductController,
 );
 
-// Seller : [View All products]
-productRouter.get("/", verifyUser, authenticateSeller, getProductsController);
+// Seller : [View all products of own]
+productRouter.get(
+  "/seller-products",
+  verifyUser,
+  authenticateSeller,
+  getSellerProductsController,
+);
+
+// Buyer : [Get and Render all products]
+
+productRouter.get("/", getProductsController);
 
 export default productRouter;

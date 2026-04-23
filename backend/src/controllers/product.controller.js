@@ -31,10 +31,27 @@ export async function createProductController(req, res) {
   });
 }
 
-export async function getProductsController(req, res) {
+export async function getSellerProductsController(req, res) {
   const { id } = req.user;
 
   const products = await productModel.find({ seller: id });
+
+  if (!products) {
+    return res.status(404).json({
+      status: false,
+      message: "Products not found",
+    });
+  }
+
+  res.status(200).json({
+    status: true,
+    message: "Products fetched successfully",
+    products,
+  });
+}
+
+export async function getProductsController(req, res) {
+  const products = await productModel.find();
 
   if (!products) {
     return res.status(404).json({
