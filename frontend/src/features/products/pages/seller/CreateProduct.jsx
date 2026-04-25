@@ -4,13 +4,30 @@ import { useProduct } from "../../hook/useProduct";
 
 const CreateProduct = () => {
   const { handleCreateProduct } = useProduct();
+
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     priceAmount: "",
   });
-  const [imageFiles, setImageFiles] = useState([]);
-  const [status, setStatus] = useState("idle");
+
+  const [variants, setVariants] = useState([
+    {
+      color: "", sizes: [], images: []
+    } // Starting with one empty variant
+  ]);
+
+  const SIZES = ["XS","S","M","L","XL"]
+
+  // Add new variant block:
+  const addVariant = () => {
+    setVariants(prev => [...prev, {color: "", sizes: [], images: []}])
+  }
+
+  // Removing variant by its index:
+  const removeVariant = (idx) => {
+    setVariants(prev => prev.filter((_, i) => i !== idx));
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;

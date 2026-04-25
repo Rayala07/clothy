@@ -5,12 +5,35 @@ export async function createProductController(req, res) {
   const { title, description, priceAmount } = req.body;
   const seller = req.user;
 
-  const images = await Promise.all(
-    req.files.map(async (file) => {
-      return await uploadFile({
-        buffer: file.buffer,
-        fileName: file.originalname,
-      });
+  const variantsMeta = JSON.parse(req.body.variants);
+
+  if (!variantsMeta || variantsMeta.length === 0) {
+    return res.status(400).json({
+      status: false,
+      message: "At least one color variant is required",
+    });
+  }
+
+  const variants = await Promise.all(
+    variantsMeta.map(async (variantMeta, index) => {
+      const filesForThisVariant = req.files[`variant_${index}_images`] || [];
+
+      const uploadImages = await Promise.all(
+        filesForThisVariant.map(async (file) => {
+          const url = await uploadFile({
+            buffer: file.buffer,
+            fileName: file.originalName,
+          });
+
+          return { url };
+        }),
+      );
+
+      return {
+        color: variantMeta.color,
+        sizes: variantMeta.sizes,
+        images: uploadImages,
+      };
     }),
   );
 
@@ -20,7 +43,7 @@ export async function createProductController(req, res) {
     price: {
       amount: priceAmount,
     },
-    images,
+    variants,
     seller: seller._id,
   });
 
@@ -34,7 +57,9 @@ export async function createProductController(req, res) {
 export async function getSellerProductsController(req, res) {
   const { id } = req.user;
 
-  const products = await productModel.find({ seller: id });
+  const products = await productModel
+    .find({ seller: id })
+    .sort({ createdAt: -1 });
 
   if (!products) {
     return res.status(404).json({

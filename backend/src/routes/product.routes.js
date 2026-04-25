@@ -28,7 +28,13 @@ productRouter.post(
   validateCreateProduct,
   verifyUser,
   authenticateSeller,
-  upload.array("images", 7),
+  upload.fields([
+    { name: "variant_0_images" },
+    { name: "variant_1_images" },
+    { name: "variant_2_images" },
+    { name: "variant_3_images" },
+    { name: "variant_4_images" },
+  ]),
   createProductController,
 );
 

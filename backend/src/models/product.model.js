@@ -25,12 +25,25 @@ const productSchema = new mongoose.Schema(
         default: "INR",
       },
     },
-    images: [
+    variants: [
       {
-        url: {
+        color: {
           type: String,
-          required: [true, "Product image upload is required"],
+          required: [true, "Color name is required"],
         },
+        sizes: {
+          type: [String],
+          enum: ["XS","S","M","L","XL"],
+          required: [true, "At least one size is required"],
+        },
+        images: [
+          {
+            url: {
+              type: String,
+              required: [true, "At least one image URL is required"],
+            },
+          },
+        ],
       },
     ],
   },
