@@ -66,3 +66,22 @@ export async function getProductsController(req, res) {
     products,
   });
 }
+
+export async function getProductByIdController(req, res) {
+  const { productId } = req.params;
+
+  const product = await productModel.findById(productId);
+
+  if (!product) {
+    return res.status(404).json({
+      status: false,
+      message: "Product not found",
+    });
+  }
+
+  res.status(200).json({
+    status: true,
+    message: "Product fetched successfully",
+    product,
+  });
+}

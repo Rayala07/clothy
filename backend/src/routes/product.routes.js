@@ -8,6 +8,7 @@ import {
   createProductController,
   getSellerProductsController,
   getProductsController,
+  getProductByIdController,
 } from "../controllers/product.controller.js";
 import { validateCreateProduct } from "../validators/product.validator.js";
 
@@ -39,8 +40,8 @@ productRouter.get(
   getSellerProductsController,
 );
 
-// Buyer : [Get and Render all products]
-
+// Buyer : [Get and Render all products/details]
 productRouter.get("/", getProductsController);
+productRouter.get("/:productId", getProductByIdController);
 
 export default productRouter;

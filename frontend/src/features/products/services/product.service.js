@@ -35,3 +35,13 @@ export async function getAllProducts() {
     throw err.response?.data || { message: "Get All products failed" };
   }
 }
+
+export async function getProductDetails(productId) {
+  try {
+    const response = await product_api.get(`/${productId}`);
+    return response.data;
+  } catch(err) {
+    console.error("Error occured: ", err);
+    throw err.response?.data || { message: "Get product details failed" }
+  }
+}

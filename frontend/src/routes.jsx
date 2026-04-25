@@ -9,6 +9,7 @@ import Home from "./features/products/pages/buyer/Home";
 import DashboardLanding from "./features/products/pages/seller/DashboardLanding";
 import CreateProduct from "./features/products/pages/seller/CreateProduct";
 import ViewProducts from "./features/products/pages/seller/ViewProducts";
+import BuyerProductDetails from "./features/products/pages/buyer/BuyerProductDetails";
 
 export const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Home />
+            },
+            {
+                path: "/product/:productId",
+                element: <BuyerProductDetails />
             },
             {
                 path: "/dashboard",

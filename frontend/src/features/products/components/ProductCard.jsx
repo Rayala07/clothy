@@ -1,6 +1,9 @@
 import { RiHeartLine } from "@remixicon/react";
+import { useNavigate } from "react-router-dom";
+
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
   const handleWishlist = (e) => {
     e.stopPropagation();
     console.log("Add to wishlist clicked for:", product._id);
@@ -19,8 +22,8 @@ const ProductCard = ({ product }) => {
         transition-all duration-200 ease-in-out
         cursor-pointer
       "
+      onClick={() => navigate(`/product/${product?._id}`)}
     >
-      {/* Image Area — tall portrait ratio for premium feel */}
       <div className="relative w-full aspect-[4/5] bg-black/5 overflow-hidden">
         {product.images && product.images.length > 0 ? (
           <img
